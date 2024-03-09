@@ -87,8 +87,40 @@ parent_subfile_one.columns
 
 ![columns](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/56be8c7f-4176-44c5-9b4a-1a99091e5dbf)
 
+As shown above, this dataframe contains 90 columns. Here is where I used my best judgment to decide which columns Jamie would need to conduct his analysis. To achieve this,
+a subset was created with only relevant columns that Jamie would require. Some columns may be duplicates (e.g. price_x, price_y, minimum_nights_x, minimum_nights_y) To explore 
+this further, the potentially duplicate columns will be included in the subset and analyzed later.The following code was executed to achieve that. Duplicate rows were dropped 
+(just to be safe). The subset dataframe was henceforth used for further data wrangling and manipulation.
+```
+# Creating a subset dataframe/dataset with only relevant columns
+subset_df = parent_subfile_two[['id','name','date','description','host_id','host_name','host_since',
+              'host_location','host_response_time','host_response_rate',
+              'host_acceptance_rate','host_is_superhost','host_neighbourhood',
+              'host_listings_count','host_total_listings_count','host_verifications',
+              'host_has_profile_pic','host_identity_verified','property_type',
+              'room_type','accommodates','bathrooms','bedrooms','beds','amenities',
+              'price_x','price_y','adjusted_price','minimum_nights_x','minimum_nights_y',
+              'maximum_nights_x','maximum_nights_y', 'calendar_updated','has_availability',
+              'number_of_reviews','review_scores_rating','review_scores_accuracy',
+              'reviews_per_month']].copy()
 
+# Drop duplicates
+subset_df = subset_df.drop_duplicates()
 
+# Check for duplicates
+duplicates_count = subset_df.duplicated().sum()
+duplicates_count
 
+```
+Now that a subset has been created, it can be explored further. The following code displays the top two rows and all columns. This gives an quick impression of the dataframe
+```
+pd.set_option('display.max_columns',40)
+subset_df.head(2)
+
+```
+![columns2](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/1532b2ae-f8e9-4f53-acfc-7ae51141ca76)
+
+This subset contains 395,660 rows and 38 columns. This was obtained using the code subset_df.shape. To get a general idea of its composition, the code subset_df.info() was
+engaged. The result shows that there are null values in some columns. 
 
 
