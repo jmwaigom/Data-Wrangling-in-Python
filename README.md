@@ -121,6 +121,40 @@ subset_df.head(2)
 ![columns2](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/1532b2ae-f8e9-4f53-acfc-7ae51141ca76)
 
 This subset contains 395,660 rows and 38 columns. This was obtained using the code subset_df.shape. To get a general idea of its composition, the code subset_df.info() was
-engaged. The result shows that there are null values in some columns. 
+engaged. Quick observations show that there are some null values in some columns. Some columns like'id' and date have incorrect datatypes
 
 ![columns3](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/a7718bc0-7c37-460b-a848-54688e977e96)
+
+Null values will be explored first. To return only columns that had null values, the following code was executed. It appears that bathroom and calendar_updated columns are completely empty.
+For that reason, they were dropped.
+
+```
+# This code returns all columns whether they have null values or not
+all_columns = subset_df.isnull().sum()
+
+# Filtering to display columns with null values only
+null_value_columns = all_columns[all_columns > 0]
+
+# Sorting columns displaying the ones with most null values at the top
+null_value_columns.sort_values(ascending=False)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
