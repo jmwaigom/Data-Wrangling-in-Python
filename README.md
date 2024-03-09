@@ -123,4 +123,4 @@ subset_df.head(2)
 This subset contains 395,660 rows and 38 columns. This was obtained using the code subset_df.shape. To get a general idea of its composition, the code subset_df.info() was
 engaged. The result shows that there are null values in some columns. 
 
-
+![columns3](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/a7718bc0-7c37-460b-a848-54688e977e96)
