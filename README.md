@@ -284,6 +284,20 @@ print("Are host_listings_count and host_total_listings_count duplicates?", are_d
 ```
 ![column10](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/8ff8e9c4-ab24-4641-8319-47c19ed4321e)
 
+As it can be seen above, the two columns were not duplicate of each other. The following step was to identify the instances/rows that had different values for both columns.
+```
+#Identifying instances in which the two columns dont have same values
+# Filtering rows where values in host_listings_count and host_total_listings_count are different
+differences = subset_df[subset_df['host_listings_count'] != subset_df['host_total_listings_count']]
+
+# Displaying the rows in both columns where differences occur
+differences[['host_listings_count','host_total_listings_count']]
+
+```
+The results below show all the rows in which the values in 'host_listings_count' and 'host_total_listings_count' were different. This is 46% (over 180k) of all rows.
+In this case, both columns will be kept.
+
+![column11](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/7734a0a3-a6fc-4850-a922-dae3f8b9b5f1)
 
 
 ### Limitations
