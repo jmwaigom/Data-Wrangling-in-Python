@@ -125,7 +125,7 @@ engaged. Quick observations show that there are some null values in some columns
 
 ![columns3](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/a7718bc0-7c37-460b-a848-54688e977e96)
 
-Null values will be explored first. To return only columns that had null values, the following code was executed. It appears that bathroom and calendar_updated columns are completely empty.
+Null values will be explored first. To return only columns that had null values, the following code was executed. It appears that bathrooms and calendar_updated columns are completely empty.
 For that reason, they were dropped.
 
 ```
@@ -138,12 +138,67 @@ null_value_columns = all_columns[all_columns > 0]
 # Sorting columns displaying the ones with most null values at the top
 null_value_columns.sort_values(ascending=False)
 ```
+![column4](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/40745584-f833-49d5-97d1-aeb623cc57a8)
 
+```
+# Code to drop 'bathrooms' and 'calendar_updated' columns
+subset_df.drop(columns=['bathrooms','calendar_updated'],inplace=True)
+```
+For numerical columns, NaN was replaced with median value. It made more sense to fill NaN with values that represent 50% of the data in the respective columns.
+For non-numerical/string columns, Null values were replaced with the string 'unknown'.
 
+```
+# For bedrooms, replacing NaN with median value
+subset_df['bedrooms'] = subset_df['bedrooms'].fillna(value=subset_df['bedrooms'].median())
 
+# For host_neighbourhood, replacing NaN with "unknown"
+subset_df['host_neighbourhood'] = subset_df['host_neighbourhood'].fillna('unknown')
 
+# For host_location, replacing NaN with "unknown"
+subset_df['host_location'] = subset_df['host_location'].fillna('unknown')
 
+# For host_is_superhost, replacing NaN with "unknown"
+subset_df['host_is_superhost'] = subset_df['host_is_superhost'].fillna('unknown')
 
+# For review_scores_rating, replacing NaN with median value
+median_value = subset_df['review_scores_rating'].median()
+subset_df['review_scores_rating'] = subset_df['review_scores_rating'].fillna(median_value)
+
+# For review_scores_accuracy, replacing NaN with median value
+median_review_accuracy = subset_df['review_scores_accuracy'].median()
+subset_df['review_scores_accuracy'] = subset_df['review_scores_accuracy'].fillna(median_review_accuracy)
+
+# For reviews_per_month. replacing NaN with median value
+med_rev_per_month = subset_df['reviews_per_month'].median()
+subset_df['reviews_per_month'] = subset_df['reviews_per_month'].fillna(med_rev_per_month)
+
+# For host_response_time, replacing NaN with "unknown"
+subset_df['host_response_time'] = subset_df['host_response_time'].fillna('unknown')
+
+# For host_response_rate, replacing NaN with median value
+''' First removing %, changing dtype to float then replacing NaN with median value '''
+subset_df['host_response_rate'] = subset_df['host_response_rate'].str.replace('%','').astype(float)
+med_resp_rate = subset_df['host_response_rate'].median()
+subset_df['host_response_rate'] = subset_df['host_response_rate'].fillna(med_resp_rate)
+
+# For host_acceptance_rate, replacing NaN with median value: Same procedure as host_response_rate
+subset_df['host_acceptance_rate'] = subset_df['host_acceptance_rate'].str.replace('%','').astype(float)
+med_acc_rate = subset_df['host_acceptance_rate'].median()
+subset_df['host_acceptance_rate'] = subset_df['host_acceptance_rate'].fillna(med_acc_rate)
+
+# For description, replacing NaN with "unknown"
+subset_df['description'] = subset_df['description'].fillna('unknown')
+
+# For beds, replacing NaN with median value
+med_beds = subset_df['beds'].median()
+subset_df['beds'] = subset_df['beds'].fillna(med_beds)
+
+```
+
+### Limitations
+There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
+string/object columns, they were replaced by 'unknown'. These values are not actual data points, hence they can potentially lead to a relatively
+skewed or incorrect analysis. Caution and disclaimer should be used when working with columns that had null values
 
 
 
