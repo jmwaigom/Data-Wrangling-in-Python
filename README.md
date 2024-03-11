@@ -253,6 +253,39 @@ subset_df[['listing_id','listing_name']].head()
 ```
 ![column8](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/a572a3ab-f28a-46b8-8d26-18fa5e440395)
 
+The next step was to explore the 'listing_name' column. It contained property name, star rating (e.g.★4.80, ★3.26), number of bedrooms, beds and bathrooms.
+For usability, this column was split so that each column has only one of the aforementioned fields. The following code was written to achieve this
+```
+# Creating new columns:
+new_columns = ['property_name', 'star_rating', 'n_bedrooms', 'n_beds', 'n_baths']
+subset_df[new_columns] = subset_df['listing_name'].str.split(' · ', expand=True)
+
+# Removing stars from the 'star_rating' column
+subset_df['star_rating'] = subset_df['star_rating'].str.replace('★', '')
+
+# Checking to see whether the listing_name column has been split and new ones have been added
+subset_df.columns
+
+```
+The image below shows that a few extra columns have been added as a result of the split of 'listing_name' column
+![column9](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/895405a3-06c6-4384-aeaf-fc0b885c5306)
+
+Next, the columns 'host_listings_count' and 'host_total_listings_count' were explored to see whether they were duplicate of one another. If yes, one would be dropped. If not, both would be kept and
+further clarification would be required to explain the difference between them
+```
+# Checking if the two columns are duplicates of each other
+are_duplicates = subset_df['host_listings_count'].equals(subset_df['host_total_listings_count'])
+
+# Printing the result
+print("Are host_listings_count and host_total_listings_count duplicates?", are_duplicates)
+
+# The result shows that the columns are not duplicate.
+
+```
+![column10](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/8ff8e9c4-ab24-4641-8319-47c19ed4321e)
+
+
+
 ### Limitations
 There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
 string/object columns, they were replaced by 'unknown'. These values are not actual data points, hence they can potentially lead to a relatively
