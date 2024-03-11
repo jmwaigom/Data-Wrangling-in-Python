@@ -327,13 +327,21 @@ subset_df['avg_minimum_nights']
 ```
 ![column13](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/c6823d89-aae3-4ddd-a7b2-9dce9f06ec14)
 
+The procedure above was repeated on 'maximum_nights_x' and 'maximum_nights_y'. The two columns were averaged to generate a new column called 'avg_maximum_nights'
+
 
 
 ### Limitations
-There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
+1. There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
 string/object columns, they were replaced by 'unknown'. These values are not actual data points, hence they can potentially lead to a relatively
 skewed or incorrect analysis. Caution and disclaimer should be used when working with columns that had null values
 
+2. Merging and concatenating all files into one large csv file resulted in columns which at first glance appeared to be duplicates of one another, but after exploration,
+   it was found out that they weren't. For example: 'minimum_nights_x' and 'minimum_nights_y'. These columns had same values for some rows but not all rows. As a result, they
+   were averaged. This may to some extent affect the accuracy of analysis if these columns are used. Caution and disclaimer should be used.
+
+3. Columns 'price_x' and 'price_y' were abandoned due to lack of clarity as to what they represented. Instead of being averaged like 'minimum_nights_x' and 'minimum_nights_y',
+   Adjusted_price' column was used instead. This may affect the accuracy of analysis if adjusted price was meant to be different from 'price_x' and 'price_y'
 
 
 
