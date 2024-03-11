@@ -194,6 +194,21 @@ med_beds = subset_df['beds'].median()
 subset_df['beds'] = subset_df['beds'].fillna(med_beds)
 
 ```
+To confirm that all null values were handled correctly, the following code was executed
+```
+subset_df.isnull().sum()
+```
+As it can be seen below, there are no more null values displayed in the dataset
+
+![column5](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/281b8c49-592b-46a5-a825-9b28f1fbbef8)
+
+The next task was to explore datatypes to ensure data in each column was of correct datatype
+```
+# This code displays datatype for each column
+subset_df.dtypes
+```
+![column6](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/c4775466-0a0f-43d2-9345-3d148238adfe)
+
 
 ### Limitations
 There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
