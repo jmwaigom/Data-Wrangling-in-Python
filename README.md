@@ -209,6 +209,49 @@ subset_df.dtypes
 ```
 ![column6](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/c4775466-0a0f-43d2-9345-3d148238adfe)
 
+```
+The following columns need to be changed datatypes
+float to int: beds, bedrooms, number_of_reviews, host_listings_count,
+               host_total_listings_count, reviews_per_month, minimum and maximum nights
+ float to object: id, host_id
+ object to float: price_x, price_y, adjusted_price
+ object to date: date, host_since
+
+# Converting float to int
+subset_df = subset_df.astype({'beds': 'int','bedrooms':'int','number_of_reviews':'int',
+                             'host_listings_count':'int','host_total_listings_count':'int',
+                             'reviews_per_month':'int','minimum_nights_x':'int',
+                             'maximum_nights_x':'int'})
+
+# Converting float to object
+subset_df = subset_df.astype({'id':'object','host_id':'object'})
+
+# Converting object to float
+# This code removes the dollar sign and any commas first then converting it to float
+price_columns = ['price_x','price_y','adjusted_price']
+subset_df[price_columns] = subset_df[price_columns].replace('[\$,]', '', regex=True).astype(float)
+
+# Converting object to date
+date_columns = ['date','host_since']
+subset_df[date_columns] = subset_df[date_columns].apply(pd.to_datetime, format='%m/%d/%Y')
+
+# Checking to make sure the datatypes have converted correctly
+subset_df.dtypes
+
+```
+![column7](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/b8e28682-f5fe-4cd9-84d9-2e29afd1e634)
+
+Thereafter, 'id' and 'name' columns were changed names to 'listing_id' and 'listing_name'. This would make them easily distinguishable.
+The following code was written to achieve that
+```
+# Renaming 'id' column to 'listing_id' and 'name' to 'listing_name'
+subset_df.rename(columns={'id':'listing_id','name':'listing_name'}, inplace=True)
+
+#Checking to see whether the renaming was successful
+subset_df[['listing_id','listing_name']].head()
+
+```
+![column8](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/a572a3ab-f28a-46b8-8d26-18fa5e440395)
 
 ### Limitations
 There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
