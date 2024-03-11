@@ -299,6 +299,35 @@ In this case, both columns will be kept.
 
 ![column11](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/7734a0a3-a6fc-4850-a922-dae3f8b9b5f1)
 
+The same method of exploration was used to check whether columns 'minimum_nights_x' and 'minimum_nights_y' were duplicates or not. They were not duplicate. However,
+only 24215 out of 395660 rows, roughly 6% were a mismatch between minimum_nights_x and minimum_nights_y. With a relatively low difference, these two columns were
+averaged, resulting in a new column called 'avg_minimum_nights'. See below for code and results.
+```
+# Checking if the two columns are duplicates of each other
+nights_duplicated = subset_df['minimum_nights_x'].equals(subset_df['minimum_nights_y'])
+
+# Printing the result
+print('Is minimum_nights_x and minimum_nights_y duplicated?', nights_duplicated)
+
+# Filtering rows to display only the ones with mismatching values, then extracting the two columns
+subset_df[subset_df['minimum_nights_x'] != subset_df['minimum_nights_y']][['minimum_nights_x',
+                                                                           'minimum_nights_y']]
+
+```
+![column12](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/5654a903-0cac-495a-a749-77c248ef4777)
+
+```
+# Creating a column with average values for 'minimum_nights_x' and 'minimum_nights_y'
+subset_df['avg_minimum_nights'] = subset_df[['minimum_nights_x','minimum_nights_y']].mean(axis=1)
+subset_df['avg_minimum_nights'] = subset_df['avg_minimum_nights'].astype(int)
+
+# Confirming that the column creation has executed
+subset_df['avg_minimum_nights']
+
+```
+![column13](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/c6823d89-aae3-4ddd-a7b2-9dce9f06ec14)
+
+
 
 ### Limitations
 There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
