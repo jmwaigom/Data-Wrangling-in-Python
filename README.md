@@ -1,5 +1,11 @@
 # Albany Airbnb Data
 ### Table of Contents
+- [Project Overview](#project-overview)
+- [Data Source](#data-source)
+- [Approach](#approach)
+- [Final Product](#final-product)
+- [Limitations](#limitations)
+
 ### Project Overview
 
 Jamie, a Senior Data Analyst at Airbnb wants to conduct a performance analysis of properties in the months of July, August, September and October of 2023. 
@@ -358,6 +364,7 @@ reordered_df.head(2)
 ```
 ![column15](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/4cc9ba99-ecc0-4c7d-9ecd-466cefb1d166)
 
+### Final Product
 The reordered dataset was checked for duplicates and null values once again to ensure there was none. Thereafter, it was finally converted to csv file called
 'airbnb_albany_data.csv' using the following code.
 ```
