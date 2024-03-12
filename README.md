@@ -329,7 +329,42 @@ subset_df['avg_minimum_nights']
 
 The procedure above was repeated on 'maximum_nights_x' and 'maximum_nights_y'. The two columns were averaged to generate a new column called 'avg_maximum_nights'
 
+The next step was to drop unnecessary or redundant columns. Afterwards, the columns were reordered so that they're easily accessible. This was accomplished as follows:
+```
+Dropping unwanted columns
 
+Listing_name: 'property_name' which is a new column will replace it
+price_x and price_y: 'adjusted_price' will be used instead
+minimum_nights_x and minimum_nights_y: 'avg_minimum_nights' will be used instead
+maximum_nights_x and maximum_nights_y: 'avg_maximum_nights' will be used instead
+
+'''
+# Dropping column
+subset_df.drop(columns=['listing_name','price_x','price_y','minimum_nights_x','minimum_nights_y',
+                       'maximum_nights_x','maximum_nights_y'], inplace=True)
+# Reordering columns 
+reordered_df = subset_df[['listing_id','property_name','property_type','description','star_rating',
+                                  'bedrooms','n_bedrooms','beds','room_type','accommodates',
+                                  'amenities','avg_minimum_nights','avg_maximum_nights','has_availability',
+                                  'adjusted_price','number_of_reviews','reviews_per_month','review_scores_rating',
+                                  'review_scores_accuracy','date','host_id','host_name','host_since',
+                                  'host_location','host_response_time','host_response_rate','host_acceptance_rate',
+                                  'host_is_superhost','host_neighbourhood','host_listings_count','host_total_listings_count',
+                                  'host_verifications','host_has_profile_pic','host_identity_verified']].copy()
+
+# Confirming that the reorder has worked
+reordered_df.head(2)
+
+```
+![column15](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/4cc9ba99-ecc0-4c7d-9ecd-466cefb1d166)
+
+The reordered dataset was checked for duplicates and null values once again to ensure there was none. Thereafter, it was finally converted to csv file called
+'airbnb_albany_data.csv' using the following code.
+```
+reordered_df.to_csv('airbnb_albany_data.csv',index=False)
+
+```
+The final csv file was then emailed to Jamie as requested.
 
 ### Limitations
 1. There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
