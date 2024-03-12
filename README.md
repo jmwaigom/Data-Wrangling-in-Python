@@ -378,7 +378,7 @@ The reordered dataset was checked for duplicates and null values once again to e
 reordered_df.to_csv('airbnb_albany_data.csv',index=False)
 
 ```
-The final csv file was then emailed to Jamie as requested.
+The final csv file was then uploaded to cloud where Jamie had access. An email was then sent to notify her that the project was completed.
 
 ### Limitations
 1. There was a substantial number of null values in a few columns. For numerical columns, these nulls were replaced with median values and for
