@@ -1,4 +1,11 @@
 # Albany Airbnb Data
+![image](https://github.com/jmwaigom/Data-Wrangling-in-Python/assets/155841258/9572c6c7-8d6f-4153-bf13-8769576cfb74)
+
+
+
+
+
+
 ### Table of Contents
 - [Project Overview](#project-overview)
 - [Data Source](#data-source)
